@@ -1,6 +1,6 @@
 {
-  "name": "gdstest",
-  "homepage": "https://github.com/lucasmgonzalez/gds-test/",
+  "name": "gds-test",
+  "homepage": "https://github.com/lucasmgonzalez/gds-test",
   "repository": "https://github.com/lucasmgonzalez/gds-test.git",
   "structure": [
     {
