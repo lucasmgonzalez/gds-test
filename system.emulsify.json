@@ -1,7 +1,7 @@
 {
     "name": "gds-test",
     "homepage": "https://github.com/emulsify-ds/compound",
-    "repository": "https://github.com/lucasmgonzalez/gds-test.git",
+    "repository": "https://github.com/emulsify-ds/compound.git",
     "structure": [
       {
         "name": "atoms",
@@ -22,15 +22,15 @@
         "structureImplementations": [
           {
             "name": "atoms",
-            "directory": "./components/atoms"
+            "directory": "./components/01-atoms"
           },
           {
             "name": "molecules",
-            "directory": "./components/molecules"
+            "directory": "./components/02-molecules"
           },
           {
             "name": "organisms",
-            "directory": "./components/organisms"
+            "directory": "./components/03-organisms"
           }
         ],
         "directories": [
@@ -47,12 +47,6 @@
             "path": "./components/styles.scss",
             "destinationPath": "./components/styles.scss",
             "description": "Primary style scss file"
-          },
-          {
-            "name": "script",
-            "path": "./components/global.js",
-            "destinationPath": "./components/global.js",
-            "description": "Global script file"
           }
         ],
         "components": [
@@ -60,18 +54,12 @@
             "name": "buttons",
             "structure": "atoms",
             "required": true,
-            "dependency": ["icons"]
-          },
-          {
-            "name": "icons",
-            "structure": "atoms",
-            "required": true,
             "dependency": []
           },
           {
-            "name": "alerts",
+            "name": "alert",
             "structure": "molecules",
-            "dependency": ["buttons", "icons"]
+            "dependency": ["buttons"]
           }
         ]
       }
