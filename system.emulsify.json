@@ -49,12 +49,6 @@
       ],
       "files": [
         {
-          "name": "package.json",
-          "path": "./npm-config/starter-package.json",
-          "destinationPath": "./package.json",
-          "description": "Package info to install dependencies and to build assets"  
-        },
-        {
           "name": "style",
           "path": "./components/styles.scss",
           "destinationPath": "./components/styles.scss",
@@ -67,9 +61,15 @@
           "description": "Global script file"
         },
         {
+          "name": "package.json",
+          "path": "./npm-config/starter-package.json",
+          "destinationPath": "./package.json",
+          "description": "Package info to install dependencies and to build assets"
+        },
+        {
           "name": "tailwind",
           "path": "./tailwind.config.js",
-          "destinationPath": "./",
+          "destinationPath": "./tailwind.config.js",
           "description": "Tailwind config file"
         }
       ],
