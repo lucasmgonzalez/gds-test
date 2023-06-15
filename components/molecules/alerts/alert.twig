@@ -1,0 +1,57 @@
+{#
+/**
+ * Available variables:
+ * - alert_type - the content of the button (typically text)
+ *
+ * Available blocks:
+ */
+#}
+
+{% if not alert_type %}
+  {% set alert_modifiers = [] %}
+{% else %}
+  {% set alert_modifiers = [alert_type] %}
+{% endif %}
+
+{% set button_color_modifier = alert_type %}
+{% if alert_type == 'gray' %}
+  {% set button_color_modifier = 'dark' %}
+{% endif %}
+
+
+<div id="alert-1" {{ bem('alert', alert_modifiers) }} role="alert">
+  <div class="flex items-center">
+    {% include "@atoms/icons/check_circle.twig" with {
+      size_modifier: 'xs',
+      extra_classes: ['mr-2']
+    } %}
+    <span class="sr-only">Info</span>
+
+    {% if title %}
+      <h3 class="alert__title">{{ title }}</h3>
+    {% endif %}
+
+    <button type="button" class="alert__close-button" data-dismiss-target="#alert-1" aria-label="Close">
+      <span class="sr-only">Close</span>
+      {% include "@atoms/icons/close.twig" with {
+        size_modifier: 'sm'
+      }%}
+    </button>
+  </div>
+
+  {% if text %}
+    <div class="mt-2 mb-4 text-sm">
+      {{ text }}
+    </div>
+  {% endif %}
+
+
+  <div class="flex">
+    {% if cta_text %}
+      {% include "@atoms/buttons/button.twig" with {
+        color_modifier: button_color_modifier,
+        button_content: cta_text
+      }%}
+    {% endif %}
+  </div>
+</div>

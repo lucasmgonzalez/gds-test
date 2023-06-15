@@ -1,0 +1,43 @@
+.icon {
+  width: 18px;
+  height: 18px;
+
+  svg {
+    width: 100%;
+  }
+
+  &.icon--current-size {
+    width: 1em;
+    height: 1em;
+  }
+
+  &.icon--xs {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  &.icon--sm {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &.icon--md {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &.icon--lg {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  &.icon--xl {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  &.icon--xxl {
+    width: 6rem;
+    height: 6rem;
+  }
+}

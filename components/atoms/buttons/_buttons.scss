@@ -1,0 +1,216 @@
+// Sass map to define colors. Each set should have a "Dark" variation when required.
+// e.g. `default` and `default-dark`. Or `purple` and `purple-dark`.
+$button-colors: (
+  primary: (
+    text: theme('colors.white'),
+    bg: theme('colors.primary.700'),
+    text-hover: theme('colors.white'),
+    bg-hover: theme('colors.primary.800'),
+    outline-border: theme('colors.primary.700'),
+    outline-text: theme('colors.primary.700'),
+    outline-border-hover: theme('colors.primary.800'),
+    outline-bg-hover: theme('colors.primary.800'),
+    outline-text-hover: theme('colors.white'),
+  ),
+  dark: (
+    text: theme('colors.white'),
+    bg: theme('colors.gray.800'),
+    text-hover: theme('colors.white'),
+    bg-hover: theme('colors.gray.700'),
+    outline-border: theme('colors.gray.800'),
+    outline-text: theme('colors.gray.800'),
+    outline-border-hover: theme('colors.gray.700'),
+    outline-bg-hover: theme('colors.gray.700'),
+    outline-text-hover: theme('colors.white'),
+  ),
+  gray: (
+    text: theme('colors.black'),
+    bg: theme('colors.gray.200'),
+    text-hover: theme('colors.black'),
+    bg-hover: theme('colors.gray.300'),
+    outline-border: theme('colors.gray.200'),
+    outline-text: theme('colors.gray.800'),
+    outline-border-hover: theme('colors.gray.300'),
+    outline-bg-hover: theme('colors.gray.300'),
+    outline-text-hover: theme('colors.gray.800'),
+  ),
+  white: (
+    text: theme('colors.black'),
+    bg: theme('colors.white'),
+    text-hover: theme('colors.primary.600'),
+    bg-hover: theme('colors.gray.50'),
+    outline-border: theme('colors.gray.200'),
+    outline-text: theme('colors.gray.800'),
+    outline-border-hover: theme('colors.gray.50'),
+    outline-bg-hover: theme('colors.gray.50'),
+    outline-text-hover: theme('colors.primary.800'),
+  ),
+  success: (
+    text: theme('colors.white'),
+    bg: theme('colors.green.700'),
+    text-hover: theme('colors.white'),
+    bg-hover: theme('colors.green.800'),
+    outline-border: theme('colors.green.700'),
+    outline-text: theme('colors.green.700'),
+    outline-border-hover: theme('colors.green.800'),
+    outline-bg-hover: theme('colors.green.800'),
+    outline-text-hover: theme('colors.white'),
+  ),
+  error: (
+    text: theme('colors.white'),
+    bg: theme('colors.red.700'),
+    text-hover: theme('colors.white'),
+    bg-hover: theme('colors.red.800'),
+    outline-border: theme('colors.red.700'),
+    outline-text: theme('colors.red.700'),
+    outline-border-hover: theme('colors.red.800'),
+    outline-bg-hover: theme('colors.red.800'),
+    outline-text-hover: theme('colors.white'),
+  ),
+  warning: (
+    text: theme('colors.white'),
+    bg: theme('colors.yellow.700'),
+    text-hover: theme('colors.white'),
+    bg-hover: theme('colors.yellow.800'),
+    outline-border: theme('colors.yellow.700'),
+    outline-text: theme('colors.yellow.700'),
+    outline-border-hover: theme('colors.yellow.800'),
+    outline-bg-hover: theme('colors.yellow.800'),
+    outline-text-hover: theme('colors.white'),
+  ),
+);
+
+// Mixin to define colors for one or more schemes.
+// Simply pass the color scheme to the mixin to get the colors defined in the map.
+// e.g. @include buttonColors(default) will get all of the colors defined in the "default" section.
+@mixin buttonColors(
+  $scheme,
+  $pallate: map-get($button-colors, $scheme),
+  $map: $button-colors
+) {
+  color: map-get($pallate, text);
+  background-color: map-get($pallate, bg);
+
+  &:visited {
+    color: map-get($pallate, text);
+  }
+
+  &:hover {
+    color: map-get($pallate, text-hover);
+    background-color: map-get($pallate, bg-hover);
+  }
+}
+
+// The button-base mixin contains styles that apply to all buttons
+// regardless of color or size.
+@mixin button-base {
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Button color variations
+// Note how we include dark mode options for each
+@mixin button-color-primary {
+  @include buttonColors(primary);
+
+  @media (prefers-color-scheme: dark) {
+    @include buttonColors(primary-dark);
+  }
+}
+
+@mixin button-color-secondary {
+  @include buttonColors(secondary);
+
+  @media (prefers-color-scheme: dark) {
+    @include buttonColors(secondary-dark);
+  }
+}
+
+// Button size variations
+$button-sizes: (
+  xs: (
+    font-size: 12px,
+    line-height: 1.5,
+    padding: 8px 12px,
+  ),
+  sm: (
+    font-size: 14px,
+    line-height: 1.5,
+    padding: 8px 12px,
+  ),
+  md: (
+    font-size: 14px,
+    line-height: 1.5,
+    padding: 10px 20px,
+  ),
+  lg: (
+    font-size: 16px,
+    line-height: 1.5,
+    padding: 12px 20px,
+  ),
+  xl: (
+    font-size: 16px,
+    line-height: 1.5,
+    padding: 14px 24px,
+  ),
+);
+
+@mixin buttonSizes($size, $map: map-get($button-sizes, $size)) {
+  font-size: map-get($map, font-size);
+  line-height: map-get($map, line-height);
+  padding: map-get($map, padding);
+}
+
+.button {
+  @include button-base;
+  @apply rounded-lg transition-colors ease-in-out;
+
+  @include buttonColors(primary);
+  @include buttonSizes(md);
+
+  // Colors
+  @each $colorVariant, $pallate in $button-colors {
+    &.button--#{$colorVariant} {
+      @include buttonColors($colorVariant);
+
+      &.button--outline {
+        border-color: map-get($pallate, outline-border);
+        color: map-get($pallate, outline-text);
+
+        &:hover {
+          border-color: map-get($pallate, outline-border-hover);
+          color: map-get($pallate, outline-text-hover);
+          background-color: map-get($pallate, outline-bg-hover);
+        }
+      }
+    }
+  }
+
+  // Sizes
+  @each $sizeVariant, $map in $button-sizes {
+    &.button--#{$sizeVariant} {
+      @include buttonSizes($sizeVariant);
+    }
+  }
+
+  &.button--outline {
+    @apply bg-transparent border border-solid;
+  }
+
+  .icon {
+    @apply inline-block;
+
+    &:first-child {
+      @apply mr-2;
+    }
+
+    &:last-child {
+      @apply ml-2;
+    }
+  }
+}

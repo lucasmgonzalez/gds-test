@@ -1,0 +1,9 @@
+{% set color_modifier = content.field_button_color[0]['#markup'] %}
+{% set size_modifier = content.field_button_size[0]['#markup'] %}
+
+
+{% include "@atoms/buttons/button.twig" with {
+  color_modifier: color_modifier,
+  size_modifier: size_modifier,
+  button_content: content.field_button_link[0]['#title'],
+} %}

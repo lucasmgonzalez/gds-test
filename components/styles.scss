@@ -1,0 +1,31 @@
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+// @import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Base
+// @import 'colors.scss';
+
+// Components
+@import 'components/atoms/**/*.scss';
+@import 'components/molecules/**/*.scss';
+@import 'components/organisms/**/*.scss';
+
+@layer components {
+  .block,
+  .node {
+    @apply mb-4;
+  }
+
+  .node__content p,
+  .node__content ul,
+  .node__content ol {
+    @apply mb-4 leading-normal;
+  }
+
+  [id$='-local-tasks'] ul {
+    @apply list-disc list-inside;
+  }
+}

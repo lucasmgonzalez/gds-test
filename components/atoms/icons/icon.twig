@@ -1,0 +1,22 @@
+{% if not additional_attributes %}
+  {% set additional_attributes = {}%}
+{% endif %}
+{% if not extra_classes %}
+  {% set extra_classes = []%}
+{% endif %}
+
+{% if not icon_modifiers %}
+  {% set icon_modifiers = [] %}
+{% endif %}
+
+{% if size_modifier %}
+  {% set icon_modifiers = icon_modifiers|merge([size_modifier]) %}
+{% endif %}
+
+{% set additional_attributes = additional_attributes|merge({
+  class: bem('icon', icon_modifiers, '', extra_classes),
+}) %}
+
+<div {{add_attributes(additional_attributes)}}>
+  {% block icon_content %}{% endblock %}
+</div>

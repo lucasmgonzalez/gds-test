@@ -1,0 +1,7 @@
+{% include "@organisms/hero/hero.twig" with {
+  heading: content.field_heading,
+  description: content.field_description,
+  image: content.field_image,
+  cta_link: content.field_cta[0]['#url'],
+  cta_text: content.field_cta[0]['#title']
+} %}

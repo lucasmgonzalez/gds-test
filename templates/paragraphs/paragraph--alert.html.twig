@@ -1,0 +1,6 @@
+{% include "@molecules/alerts/alert.twig" with {
+  title: content.field_alert_title,
+  text: content.field_aler,
+  cta_text: content.field_alert_cta_text,
+  alert_type: content.field_alert_type[0]["#markup"]
+} %}

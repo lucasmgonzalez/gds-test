@@ -1,0 +1,63 @@
+{#
+/**
+ * Available variables:
+ * - button_content - the content of the button (typically text)
+ *
+ * Available blocks:
+ * - button_content - used to replace the content of the button with something other than text
+ *   for example: to insert an icon
+ */
+#}
+
+{% set button_base_class = button_base_class|default('button') %}
+
+{% if not button_modifiers %}
+  {% set button_modifiers = [] %}
+{% endif %}
+
+{% if not additional_attributes %}
+  {% set additional_attributes = {}%}
+{% endif %}
+
+{% if color_modifier %}
+  {% set button_modifiers = button_modifiers|merge([color_modifier]) %}
+{% endif %}
+
+{% if size_modifier %}
+  {% set button_modifiers = button_modifiers|merge([size_modifier]) %}
+{% endif %}
+
+{% if outline_variant %}
+  {% set button_modifiers = button_modifiers|merge(['outline']) %}
+{% endif %}
+
+{% set additional_attributes = additional_attributes|merge({
+  class: bem(button_base_class, button_modifiers, button_blockname),
+}) %}
+
+<button type="button" {{ add_attributes(additional_attributes) }}>
+  {% if prefix_icon %}
+    {# {% set icon_path = '@atoms/icons/'~ prefix_icon ~'.twig' %}
+    {% include(icon_path) with {
+      size_modifier: 'current-size',
+    }%} #}
+
+    {% include "@atoms/icons/check_circle.twig" with {
+      size_modifier: 'current-size',
+    }%}
+  {% endif %}
+
+  <span>
+    {{ button_content }}
+  </span>
+
+  {% if suffix_icon %}
+    {# {% set icon_path = '@atoms/icons/'~ suffix_icon ~'.twig' %}
+    {% include(icon_path) with {
+      size_modifier: 'current-size',
+    }%} #}
+    {% include "@atoms/icons/check_circle.twig" with {
+      size_modifier: 'current-size',
+    }%}
+  {% endif %}
+</button>
